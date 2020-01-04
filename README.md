@@ -1,3 +1,6 @@
  
 针对blender的python自动uv工具
-快速给模型添加uv2，且该uv智能平铺 
+
+快速给模型添加uv2，且该uv智能平铺。
+
+在包含模型的同级别目录打开StartProcessorBlender.bat自动启动
