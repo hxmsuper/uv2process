@@ -23,18 +23,19 @@ print(filename)
  
 objects = bpy.context.scene.objects 
 for obj in objects : 
-    if obj.type == 'MESH': 
-        # 
-        print(obj)
-        obj.select_set(state=True)
+    if obj.type == 'MESH':   
         context.view_layer.objects.active = obj 
+        obj.select_set(state=True)
         mesh = obj.data  
+        print('start----------------------'+obj.name)
         if len(mesh.uv_layers) < 2:
-            lm = mesh.uv_layers.new(name='lm')
-            lm.active = True 
+            mesh.uv_layers.new(name='lm')
+            lm = mesh.uv_layers.get('lm')
             bpy.ops.object.editmode_toggle()
-            bpy.ops.uv.smart_project()
-            bpy.ops.uv.smart_project(angle_limit= 66 ,island_margin = 0)
+            lm.active = True 
+            mesh.uv_layers[1].active = True 
+            bpy.ops.uv.lightmap_pack()
+            print('end----------------------'+"lightmap pack")
             bpy.ops.object.editmode_toggle() 
 print('start to export')
 #bpy.ops.export_scene.fbx(filepath=(workPath+'/'+filename+".fbx"), axis_forward='-Z', axis_up='Y')
